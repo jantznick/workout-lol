@@ -75,10 +75,18 @@ export default function App(props) {
 
         <script
           async
-          defer
-          data-website-id='8a475643-d28f-48c6-bed0-c4bd0833f87f'
-          src='https://analytics.vincentwill.com/umami.js'
+          src='https://www.googletagmanager.com/gtag/js?id=G-1D4ECEBPES'
         ></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-1D4ECEBPES');
+            `,
+          }}
+        />
       </Head>
 
       <SessionProvider session={session}>

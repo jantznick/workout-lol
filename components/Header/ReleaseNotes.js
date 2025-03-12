@@ -3,7 +3,7 @@ import { Indicator, ActionIcon, Modal, Text } from '@mantine/core'
 import { IconBell } from '@tabler/icons-react'
 import { useLocalStorage } from '../../utils/useAccount'
 
-const releaseNotesDate = '2023-07-13T07:24:20.623Z'
+const releaseNotesDate = '2023-08-27T10:03:20.415Z'
 const dateString = new Date(releaseNotesDate).toLocaleDateString()
 
 const IconContainer = ({ children, lastVisit }) =>
@@ -36,20 +36,21 @@ const ReleaseNotes = () => {
         onClose={() => setOpened(false)}
         title={`What's New: ${dateString}`}
       >
-        <Text fw={700}>Share workouts</Text>
+        <Text fw={700}>Announcement About Videos & Instructions</Text>
         <Text mb='sm'>
-          All registered users are now able to share their workouts. Use the
-          share button next to each workout on your profile. This will copy a
-          link to your workout, which you can then share with your friends.
+          As our agreement with MuscleWiki has come to an end, we have
+          removed/replaced the videos and instructions for our exercise. Some
+          exercises will not have videos and instructions and for now - we are
+          working on replacing them. All instructions will be live by 29th
+          August. Videos will take a few weeks.
         </Text>
-
         {/* <Text mb="sm">
         Is there anything you would like to see on workout.lol that would improve your experience?
         Let me know via <a href="mailto:info@workout.lol">Email</a>, <a href="https://twitter.com/wweb_dev" target="_blank" rel="noopener noreferrer">Twitter</a> or <a href="https://github.com/Vincenius/workout-lol/issues" target="_blank" rel="noopener noreferrer">GitHub</a>.
       </Text> */}
-        <Text mb='sm'>Enjoy your workout 💪!</Text>
+        <Text mb='sm'>Thank you for your patience. Enjoy your workout 💪!</Text>
         <Text>Cheers,</Text>
-        <Text>Vincent</Text>
+        <Text>The Workout.lol Crew</Text>
       </Modal>
     </>
   )

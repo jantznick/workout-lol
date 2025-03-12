@@ -15,6 +15,7 @@ import {
   Box,
   AspectRatio,
   LoadingOverlay,
+  Modal,
 } from '@mantine/core'
 import { IconCheck, IconAlertCircle } from '@tabler/icons-react'
 import party from 'party-js'
@@ -49,7 +50,7 @@ const RepInput = ({ index, handleChange, sets, prevSet }) => (
   />
 )
 
-const ExerciseVideo = ({ video }) => {
+const ExerciseVideo = ({ video, sx, ...rest }) => {
   const [isReady, setIsReady] = useState(false)
 
   function handleVideoReady() {
@@ -60,12 +61,16 @@ const ExerciseVideo = ({ video }) => {
     <>
       <AspectRatio
         ratio={16 / 9}
-        w={250}
+        // w={250}
         sx={{
           margin: '.5em 2em 1em 0',
           borderRadius: '0.25rem',
           overflow: 'hidden',
+          cursor: 'pointer',
+          width: '100%',
+          ...sx,
         }}
+        {...rest}
       >
         <LoadingOverlay visible={!isReady} />
         <video
@@ -105,6 +110,7 @@ const ActiveExercise = ({
   const prevExercise =
     allCompletetExercises.find((e) => e._id === exercise._id) || {}
   const prevSets = prevExercise.sets || []
+  const [opened, setOpened] = useState(false)
 
   return (
     <>
@@ -126,10 +132,33 @@ const ActiveExercise = ({
 
       <Flex direction={{ base: 'column', xs: 'row' }}>
         {exercise.videos.map((video) => (
-          <ExerciseVideo key={randomId()} video={video} />
+          <ExerciseVideo
+            key={randomId()}
+            video={video}
+            onClick={() => setOpened(true)}
+          />
         ))}
       </Flex>
-
+      <Modal
+        withOverlay
+        withinPortal
+        opened={opened}
+        onClose={() => setOpened(false)}
+        centered
+        withCloseButton={false}
+        size='100%'
+      >
+        <Flex direction={{ base: 'column', xs: 'row' }} w='100%' gap='md'>
+          {exercise.videos.map((video) => (
+            <ExerciseVideo
+              key={randomId()}
+              video={video}
+              sx={{ margin: 0, width: '100%' }}
+              w={'100%'}
+            />
+          ))}
+        </Flex>
+      </Modal>
       <List type='ordered' mb='md'>
         {exercise.steps.map((step) => (
           <List.Item key={step}>{step}</List.Item>
@@ -193,13 +222,13 @@ const Workout = ({ workout, updateProgress, user }) => {
   return (
     <div>
       <InfoCard>
-        Disclaimer: All exercises and videos are provided by{' '}
+        Keep Workout.lol free. Support us by making a{' '}
         <a
-          href='https://musclewiki.com/'
+          href='https://ko-fi.com/workout_lol'
           target='_blank'
           rel='noopener noreferrer'
         >
-          musclewiki.com
+          donation.
         </a>
       </InfoCard>
       {active < workout.length && (
